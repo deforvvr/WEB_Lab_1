@@ -4,61 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Задание 2</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <table border="0" width="950" cellpadding="0" cellspacing="0" align="center" bgcolor="#99ff99">
-        <tr>
-            <td width="100" align = "center"><img width="80" src="./src/logo.png"></td> 
-        <td align="center"><H1>Театральная студия «В Созвездиях»</H1></td>
-        </table>
-        </tr>
-
-        <table border="0" width="950" cellpadding="5" cellpadding="0" align="center" bgcolor="#77ff77">
-        <tr>
-        <td align="center"><a href="./index.html" style="text-decoration: none;">Главная</a></td>
-        <td align="center"><a href="./katalog.html" style="text-decoration: none;">Каталог</a></td>
-        <td align="center"><a href="./kontakts.html" style="text-decoration: none;">Контакты</a></td>
-        <td align="center"><a href="./about.html" style="text-decoration: none;">О нас</a></td>
-        </tr>
-        </table> 
-
-        <BR>
-
-        <table border="0" width="900" cellpadding="3" align="center">
-        <tr>
-        <td width="150" cellpadding="5" valign="top" align="center">
-        <a href="./index.html" style="text-decoration: none; font-size: large;">Главная</a><BR>
-        <a href="./katalog.html" style="text-decoration: none; font-size: large;">Каталог</a><BR>
-        <a href="./kontakts.html" style="text-decoration: none; font-size: large;">Контакты</a><br>
-        <a href="./about.html" style="text-decoration: none; font-size: large;">О нас</a>
+    <header class="site-header">
+        <div class="branding container">
+            <img src="./src/logo.png" alt="Логотип студии">
+            <h1>Театральная студия «В Созвездиях»</h1>
+        </div>
+        <nav class="site-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="./index.html">Главная</a></li>
+                    <li><a href="./katalog.html">Каталог</a></li>
+                    <li><a href="./kontakts.html">Контакты</a></li>
+                    <li><a href="./about.html">О нас</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
-    
-    <td><hr><H1  align="center">О нас</H1>
 
-    <p style="margin: 0; margin-top: 0; font-size: 18px;">
-        Мы работаем на энтузиазме и в просветительских целях. Играем спектакли и организуем творческие вечера.
-        За годы работы мы создали <b>более 50 спектаклей</b> и помогли сотням людей 
-        раскрыть свой творческий потенциал.
-    </p>
-    <br><br>
-
-
-    <h3 style="margin-bottom: 7px;">Руководитель клуба</h3>
-    <img src="https://clubatom.ru/thumb/2/fudZDS4zwtWLQ2t9WEQldA/r/d/fvf6war2nii.jpg" alt="" width="400">
-    <p style="font-size: 20px;;"><b>Подвигина Елена</b></p>
-    <p style="font-size: 18px;">Кандидат педагогических наук, профессиональный филолог и организатор культурных пространств</p>
-
-    <br><br><br>
-    
-    <tr>
-        <td colspan=3 cellpadding="5" align="center">
-            <br><br><br><br>
-            <p style="text-align: center;">
-                &copy; Все права защищены
+    <main class="container">
+        <section class="content-card">
+            <h1>О нас</h1>
+            <p>
+                Мы работаем на энтузиазме и в просветительских целях. Играем спектакли и организуем творческие вечера.
+                За годы работы мы создали <b>более 50 спектаклей</b> и помогли сотням людей раскрыть свой творческий потенциал.
             </p>
-        </td>
-    </tr>
+            <h3>Руководитель клуба</h3>
+            <img class="leader-photo" src="https://clubatom.ru/thumb/2/fudZDS4zwtWLQ2t9WEQldA/r/d/fvf6war2nii.jpg" alt="Руководитель клуба">
+            <p><b>Подвигина Елена</b></p>
+            <p>Кандидат педагогических наук, профессиональный филолог и организатор культурных пространств</p>
+        </section>
+    </main>
 
+    <footer class="site-footer">
+        
+        <div class="footer-content">
+            &copy; Все права защищены
+            <p><a href = "./privacy.html">Политика конфиденциальности</a></p>
+          </div>
+    </footer>
 </body>
 </html>
