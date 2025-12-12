@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="content-card">
+    <h1>Добро пожаловать в нашу театральную студию!</h1>
+    <img class="leader-photo" src="{% static 'src/man.png' %}" alt="Артист на сцене">
+    <p class="text-lead">
+        Мы рады приветствовать вас в мире, где оживают мечты, раскрываются таланты и рождаются настоящие эмоции.
+        Наша студия — это не просто место для обучения актёрскому мастерству, это творческое пространство,
+        где каждый может найти себя, преодолеть внутренние барьеры и открыть новые грани своей личности.
+    </p>
+    <p>
+        <b>Для нас театр</b> — это искусство, которое объединяет людей, позволяет пережить уникальные эмоции и
+        рассказать важные истории. Мы верим, что в каждом человеке есть искра творчества, и наша задача — помочь ей разгореться.
+    </p>
+
+    <h3>Дисциплины</h3>
+    <table class="data-table">
+        <tr>
+            <td rowspan="3">Актёрское мастерство</td>
+            <td colspan="2"><em>«Жизнь в театре — всего лишь один сезон, а сезон — это целая жизнь»</em></td>
+        </tr>
+        <tr>
+            <td>Хореография</td>
+            <td>Вокал</td>
+        </tr>
+        <tr>
+            <td>Кинокласс</td>
+            <td>Сценическая речь</td>
+        </tr>
+    </table>
+
+    <h3>История студии</h3>
+    <p>
+        Наша театральная студия «В Созвездиях» начала свой творческий путь в 2010 году,
+        когда группа энтузиастов-выпускников ГИТИСа и Щукинского училища объединилась с общей целью —
+        создать пространство, где театр становится доступным каждому.
+    </p>
+
+    <h3>Наша команда</h3>
+    <ul class="team-list">
+        <li>
+            <b>Александр Петров</b> — художественный руководитель
+            <ul class="team-sublist">
+                <li>Окончил РАТИ-ГИТИС</li>
+                <li>15 лет опыта в театре и кино</li>
+                <li>Режиссёр-постановщик 30+ спектаклей</li>
+            </ul>
+        </li>
+        <li>
+            <b>Мария Иванова</b> — педагог по актёрскому мастерству
+            <ul class="team-sublist">
+                <li>Выпускница Театрального института им. Щукина</li>
+                <li>Актриса Московского драматического театра</li>
+                <li>Специалист по работе с подростками</li>
+            </ul>
+        </li>
+        <li>
+            <b>Дмитрий Козлов</b> — хореограф и педагог по сценическому движению
+            <ul class="team-sublist">
+                <li>Выпускник МГАХ</li>
+                <li>Участник международных танцевальных проектов</li>
+                <li>Специалист по пластическому выражению</li>
+            </ul>
+        </li>
+        <li>
+            <b>Ольга Сидорова</b> — педагог по сценической речи
+            <ul class="team-sublist">
+                <li>Кандидат искусствоведения</li>
+                <li>Автор методики по развитию дикции</li>
+                <li>Опыт преподавания — 12 лет</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>В нашей студии вы</h3>
+    <ol>
+        <li>Раскроете свой творческий потенциал</li>
+        <li>
+            Научитесь уверенно выступать перед публикой
+            <ul class="team-sublist">
+                <li>Освоите техники управления волнением</li>
+                <li>Разовьёте навыки работы с аудиторией</li>
+                <li>Поймёте, как устанавливать контакт со зрителем</li>
+            </ul>
+        </li>
+        <li>
+            Освоите технику речи и сценическое движение
+            <ul class="team-sublist">
+                <li>Дикцию и артикуляцию</li>
+                <li>Дыхательные упражнения</li>
+                <li>Пластику тела и выражение эмоций через движение</li>
+            </ul>
+        </li>
+        <li>Найдёте единомышленников и друзей</li>
+        <li>Примете участие в настоящих спектаклях</li>
+    </ol>
+
+    <h3>Мы ждём</h3>
+    <ul>
+        <li>Детей от 5 лет</li>
+        <li>Подростков</li>
+        <li>Взрослых без возрастных ограничений</li>
+    </ul>
+    
+    <section id="reviews-section">
+        <h2>Оставьте свой отзыв</h2>
+        
+        <form id="review-form" method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            <label for="id_name">Имя:</label>
+            <input type="text" id="id_name" name="name" placeholder="Ваше имя" required>
+            {% if review_form.name.errors %}
+                <div class="error">{{ review_form.name.errors }}</div>
+            {% endif %}
+            
+            <label for="id_text">Отзыв:</label>
+            <textarea id="id_text" name="text" rows="5" placeholder="Ваш отзыв" required></textarea>
+            {% if review_form.text.errors %}
+                <div class="error">{{ review_form.text.errors }}</div>
+            {% endif %}
+            
+            <button type="submit">Отправить отзыв</button>
+        </form>
+        
+        <div id="reviews-list">
+            <h3>Отзывы наших посетителей</h3>
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review-item">
+                        <strong>{{ review.name }}</strong>
+                        <span class="review-date">{{ review.created_at|date:"d.m.Y H:i" }}</span>
+                        <p>{{ review.text }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Пока нет отзывов. Будьте первым!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="promo-logos">
+        <a href="https://teatr-okno.ru/studia-prince?utm_source=yandex&utm_medium=cpc&utm_campaign=Poisk_MalPrinz_Moskva&utm_term=театральная%20студия&utm_content=17305878016&yclid=15005591710027218943">
+            <img src="{% static 'src/poklon.png' %}" alt="Партнёрская студия 1">
+        </a>
+        <a href="https://vremya-teatra.art/?utm_source=yandex&utm_medium=cpc&utm_campaign=Оптимизация%20РК%20%20119622022%20-%20А-1%2C%20Поиск%2C%20vremya-teatra.art%2C%2025.09.2025&utm_term=---autotargeting&ybaip=1&yclid=15970777590093053951">
+            <img src="{% static 'src/repa_smoke.png' %}" alt="Партнёрская студия 2">
+        </a>
+        <a href="https://www.teatr-fantazia.ru/?yclid=14731231887930949631">
+            <img src="{% static 'src/repa.png' %}" alt="Партнёрская студия 3">
+        </a>
+    </div>
+</section>
+{% endblock %}
+

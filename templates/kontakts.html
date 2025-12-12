@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="content-card">
+    <h1>Напишите нам</h1>
+    <form class="contact-form" method="post" action="{% url 'contacts' %}">
+        {% csrf_token %}
+        {{ form.name }}
+        {% if form.name.errors %}
+            <div class="error">{{ form.name.errors }}</div>
+        {% endif %}
+        
+        {{ form.email }}
+        {% if form.email.errors %}
+            <div class="error">{{ form.email.errors }}</div>
+        {% endif %}
+        
+        {{ form.subject }}
+        {% if form.subject.errors %}
+            <div class="error">{{ form.subject.errors }}</div>
+        {% endif %}
+        
+        {{ form.message }}
+        {% if form.message.errors %}
+            <div class="error">{{ form.message.errors }}</div>
+        {% endif %}
+        
+        <button class="btn" type="submit">Отправить</button>
+    </form>
+
+    <h3>Адрес</h3>
+    <ul>
+        <li>Адрес: г. Балашиха, ул. Пушкина, д. 10</li>
+        <li>Контактный номер телефона компании: +7 (495) 123-45-67</li>
+        <li>Email: <a href="mailto:7a0yI@example.com">7a0yI@example.com</a></li>
+    </ul>
+
+    <div class="map-wrapper">
+        <iframe src="https://yandex.ru/map-widget/v1/-/CLc4vYnu" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+{% endblock %}
+

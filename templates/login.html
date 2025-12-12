@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход — «В Созвездиях»{% endblock %}
+
+{% block content %}
+<section class="content-card">
+    <h1>Вход</h1>
+    <form class="contact-form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        
+        {{ form.username }}
+        {% if form.username.errors %}
+            <div class="error">{{ form.username.errors }}</div>
+        {% endif %}
+        
+        {{ form.password }}
+        {% if form.password.errors %}
+            <div class="error">{{ form.password.errors }}</div>
+        {% endif %}
+        
+        {% if form.non_field_errors %}
+            <div class="error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        
+        <button class="btn" type="submit">Войти</button>
+        <p style="margin-top: 1rem;">
+            Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a>
+        </p>
+    </form>
+</section>
+{% endblock %}
+

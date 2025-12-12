@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="content-card">
+    <h1>Услуги студии</h1>
+    <h2>Поиск</h2>
+    <form method="get" action="{% url 'catalog' %}">
+        <input type="search" name="search" class="search-input" placeholder="Введите название услуги..." value="{{ search_query }}">
+        {% if categories %}
+            <select name="category" class="search-input" style="margin-top: 0.5rem;">
+                <option value="">Все категории</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}" {% if selected_category == category.slug %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        {% endif %}
+        <button type="submit" class="btn" style="margin-top: 0.5rem;">Найти</button>
+    </form>
+    
+    <ol class="service-list">
+        {% for product in products %}
+            <li>
+                <h4>{{ product.name }}</h4>
+                <p><strong>Категория:</strong> {{ product.category.name }}</p>
+                <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+                {% if product.image %}
+                    <a href="{{ product.image.url }}" target="_blank">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                {% endif %}
+                <details>
+                    <summary>Подробнее</summary>
+                    <div>{{ product.description|linebreaks }}</div>
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" style="margin-top: 1rem;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Добавить в корзину</button>
+                        </form>
+                    {% else %}
+                        <p><a href="{% url 'login' %}">Войдите</a>, чтобы добавить товар в корзину</p>
+                    {% endif %}
+                </details>
+            </li>
+        {% empty %}
+            <li><p>Товары не найдены.</p></li>
+        {% endfor %}
+    </ol>
+</section>
+{% endblock %}
+
